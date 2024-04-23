@@ -24,7 +24,7 @@ export default function MedicalRecordUpload() {
         <div className="w-1/2 h-64 border border-4 border-gray-200 border-dashed rounded flex flex-row items-center justify-center">
             <button
                 className={classNames(
-                    "text-white font-medium py-2 px-4 rounded border border-2",
+                    "text-grey-600 font-medium py-2 px-4 rounded border border-2",
                     uploaded ? " text-green-500 border-green-500" : uploading ? "cursor-not-allowed bg-blue-300" : "bg-blue-500 border-blue-500"
                 )}
                 onClick={!uploading && !uploaded ? handleClick : undefined}

@@ -1,6 +1,9 @@
+/* globals.css */
+@import 'react-toastify/dist/ReactToastify.css'; /* Import react-toastify CSS at the top */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 * {
     scroll-behavior: smooth;
