@@ -1,6 +1,8 @@
 // frontend/app/dashboard/page.tsx
 "use client";
 
+import React from 'react';
+import axios from 'axios';
 import GuidelinesUpload from "@/components/guidelines-upload";
 import MedicalRecordUpload from "@/components/medical-record-upload";
 import { useRouter } from "next/navigation";
@@ -11,10 +13,21 @@ export const revalidate = 0;
 export default function DashboardRoot() {
     const router = useRouter();
     const { medicalRecord, guidelinesFile } = useDashboard();
-    const CASE_ID = "case_891a_6fbl_87d1_4326";
 
-    const handleContinue = () => {
-        router.push(`/dashboard/case/${CASE_ID}`);
+    const handleContinue = async () => {
+        if (medicalRecord && guidelinesFile) {
+            try {
+                const response = await axios.post('http://localhost:8000/cases');
+                const caseId = response.data.id;
+                router.push(`/dashboard/case/${caseId}`);
+            } catch (error) {
+                console.error('Failed to create case:', error);
+                // Optionally handle the error, e.g., show an error message to the user
+            }
+        } else {
+            console.log("Both files need to be uploaded before continuing.");
+            // Optionally handle the situation, e.g., inform the user to upload both files
+        }
     };
 
     return (
@@ -36,4 +49,5 @@ export default function DashboardRoot() {
         </div>
     );
 }
+
 
